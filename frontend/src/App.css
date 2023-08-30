@@ -1,38 +1,76 @@
-.App {
-  text-align: center;
+#root {
+    --neutral-background: #131516;
+    --neutral-background-lighter: #0f1111;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/**
+ * Common styling for both message-recipient and message-sender component variants.
+ */
+.message {
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 3px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/**
+ * Make it green and on the left side.
+ */
+.message-recipient {
+    background-color: green;
+    margin-left: auto;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/**
+ * Make it blue and on the right side.
+ */
+.message-sender {
+    background-color: blue;
+    margin-right: auto;
 }
 
-.App-link {
-  color: #61dafb;
+/**
+ * Formatting for the entire message window component.
+ */
+.messageWindow {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0;
+    height: 100vh;
+    width: 60%;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    background-color: var(--neutral-background);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/**
+ * The element containing the input box and send button.
+ */
+.messageInputTray {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.sendButton {
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+}
+
+.sendButtonImage {
+    width: 75%;
+}
+
+.messageInput {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    width: 55vw;
+    height: 5vh;
+    border-radius: 7px;
+    background-color: var(--neutral-background-lighter);
 }
