@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { ChatBubbleIcon, DotsHorizontalIcon, FontSizeIcon, HamburgerMenuIcon, LightningBoltIcon, PaperPlaneIcon } from '@radix-ui/react-icons';
 
 function Sidebar() {
   const [sessions, setSessions] = React.useState([
@@ -26,20 +27,27 @@ function Sidebar() {
   ]);
 
   const pastChats = sessions.map((session, index) => {
+    const maxMsgLen = 20;
     return (
       <div key={index} className='session'>
-        <div className='session-icon'>💬</div>
-        <div className='session-name'>{session}</div>
+        <div className='session-icon'><ChatBubbleIcon/></div>
+        <div className='session-name'>{session.substring(0,maxMsgLen) + (session.length > maxMsgLen ? "..." : "")}</div>
       </div>
     )
   });
 
   return (
     <div className='sidebar'>
-      <div className='prevMessages'>{pastChats}</div>
+      <div className='top'>
+        <div className='sidebarTopTray'>
+          <HamburgerMenuIcon className='hamburgerIcon'/>
+        </div>
+        <div className='prevMessages'>{pastChats}</div>
+      </div>
       <div className='userInfo'>
-        <div className='userIcon'>👤</div>
-        <div className='userName'>&nbsp;Joe Biden</div>
+        <div className='userIcon'>PD</div>
+        <div className='userName'>Patricia Daisy</div>
+        <DotsHorizontalIcon className='dotsIcon'/>
       </div>
     </div>
   )
@@ -48,8 +56,8 @@ function Sidebar() {
 function Message({message, isSender}) {
   return (
     <div className={`message-container ${isSender ? "sender" : "recipient"}`}>
-      <div className='message-icon'>
-        {isSender ? '👤' : '🤖'}
+      <div className='message-icon-container'>
+        {isSender ? <span className='message-icon'>PD</span> : <LightningBoltIcon className='message-icon'/>}
       </div>
       <div className='message-body'>
         <p>{message}</p>
@@ -85,13 +93,13 @@ function Main() {
 
   return (
     <div className='main'>
-        <div classNames='chatMessages'>
+        <div className='chatMessages'>
           {messageElements}
         </div>
 
         <div className='chatInput'>
           <input className='chatInputField' id='msg_input' type='text' placeholder='Type a message...' onKeyDown={handleKeyDown}/>
-          <button className="chatInputButton" onClick={handleInput}>✈️</button>
+          <PaperPlaneIcon className="chatInputButton" onClick={handleInput}/>
         </div>
     </div>
   )
@@ -101,8 +109,11 @@ function App() {
 
   return (
     <div className="App">
-      <Sidebar/>
-      <Main/>
+      <div className="title">Lex</div>
+      <div className='mainContent'>
+        <Sidebar/>
+        <Main/>
+      </div>
     </div>
   );
 }
