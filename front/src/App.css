@@ -1,3 +1,9 @@
+:root {
+  --highlight-gold: #8D721E;
+  --accent-primary: #E5CF89;
+  --accent-secondary: #DEC267;
+}
+
 .App {
   text-align: center;
   display:flex;
@@ -10,11 +16,99 @@
   background-color: gray;
   height: 100%;
   width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .sidebar {
-  background-color: gold;
+  background-color: var(--highlight-gold);
   height: 100%;
   width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sender {
+  background-color: var(--accent-primary);
+}
+
+.recipient {
+  background-color: var(--accent-secondary);
+}
+
+.message-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100px;
+}
+
+.message-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 7px;
+  margin: 10px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #8D721E;
+}
+
+.message-body {
+  width: 90%;
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.prevMessages {
+  margin-top: 20px;
+}
+
+.session {
+  display:flex;
+  flex-direction: row;
+}
+
+.session-icon {
+  width: 100px;
+  height: 30px;
+}
+
+.chatInput {
+  margin-bottom: 20px;
+}
+
+.chatInputField {
+  width: 1000px;
+  height: 50px;
+  border: none;
+  background-color: dimgrey;
+  border-radius: 7px;
+  padding-left: 10px;
+  margin-right: 50px;
+}
+
+.chatInputButton {
+  width: 100px;
+  height: 50px;
+  border: none;
+  font-size: large;
+  border-radius: 7px;
+}
+
+.chatInputButtonImage {
+  height: 100%;
 }
 
