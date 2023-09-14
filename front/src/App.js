@@ -46,7 +46,6 @@ function Sidebar() {
 }
 
 function Message({message, isSender}) {
-  console.log(message);
   return (
     <div className={`message-container ${isSender ? "sender" : "recipient"}`}>
       <div className='message-icon'>
@@ -64,7 +63,6 @@ function Main() {
     {body: "Have you recently experienced or witnessed a highly distressing or life-threatening event, such as a natural disaster, accident, assault, or military combat?", isSender: false},
     {body: "No, I haven't recently experienced or witnessed a highly distressing or life-threatening event.", isSender: true},
     {body: "Are you frequently reliving or experiencing intrusive thoughts, memories, or nightmares related to a traumatic event?", isSender: false},
-    {body: "Yes, I do frequently have intrusive thoughts", isSender: true},
   ]);
 
   const messageElements = messages.map((message, index) => {
@@ -73,6 +71,18 @@ function Main() {
     )
   });
 
+  const handleInput = (e) => {
+    console.log(e.target)
+    setMessages([...messages, {body: document.getElementById('msg_input').value, isSender: true}]);
+    e.target.value = '';
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleInput(e);
+    }
+  }
+
   return (
     <div className='main'>
         <div classNames='chatMessages'>
@@ -80,8 +90,8 @@ function Main() {
         </div>
 
         <div className='chatInput'>
-          <input className='chatInputField' type='text' placeholder='Type a message...'/>
-          <button className="chatInputButton">✈️</button>
+          <input className='chatInputField' id='msg_input' type='text' placeholder='Type a message...' onKeyDown={handleKeyDown}/>
+          <button className="chatInputButton" onClick={handleInput}>✈️</button>
         </div>
     </div>
   )
