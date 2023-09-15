@@ -4,11 +4,11 @@ import { ChatBubbleIcon, DotsHorizontalIcon, FontSizeIcon, HamburgerMenuIcon, Li
 
 function Sidebar() {
   const [sessions, setSessions] = React.useState([
-    {summary: "Vicarious Trauma Assessment", dateTime: "01/09/2023 12:00 PM"},
-    {summary: "Trauma Risk Check", dateTime: "01/09/2023 12:00 PM"},
-    {summary: "Detecting Vicarious Pain", dateTime: "01/09/2023 12:00 PM"},
-    {summary: "Vicarious Trauma Assessment", dateTime: "01/09/2023 12:00 PM"},
-    {summary: "Vicarious Stress Probe", dateTime: "01/09/2023 12:00 PM"},
+    {summary: "Matter #1", dateTime: "01/09/2023 12:00 PM"},
+    {summary: "Matter #2", dateTime: "01/09/2023 12:00 PM"},
+    {summary: "Matter #3", dateTime: "01/09/2023 12:00 PM"},
+    {summary: "Matter #4", dateTime: "01/09/2023 12:00 PM"},
+    {summary: "Matter #5", dateTime: "01/09/2023 12:00 PM"},
   ]);
 
   const pastChats = sessions.map((_session, index) => {
