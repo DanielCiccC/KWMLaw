@@ -16,11 +16,28 @@
   color: white;
 }
 
-.title {
-  font-size: 1.7em;
-  font-weight: bold;
+.title{
   background-color: var(--highlight-gold);
-  padding: 2px 0px;
+  padding: 6px 0px;
+}
+
+.appName {
+  height: 30px;
+  line-height: 30px;
+  font-size: 1.5em;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.appDescription {
+  font-size: 1.2em;
+  font-weight: lighter;
+  height: 30px;
+  line-height: 30px;
+  display:flex;
+  flex-direction: row;
+  white-space: nowrap;
+  justify-content: center;
 }
 
 .mainContent {
@@ -123,9 +140,22 @@
   flex-direction: row;
 }
 
+.session-text-container {
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 .session-name {
   font-weight: bold;
+  text-align: left;
   color: var(--accent-secondary);
+}
+
+.session-metadata {
+  font-weight: lighter;
+  text-align: left;
+  color: lightgrey;
 }
 
 .session-icon {

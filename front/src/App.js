@@ -4,34 +4,24 @@ import { ChatBubbleIcon, DotsHorizontalIcon, FontSizeIcon, HamburgerMenuIcon, Li
 
 function Sidebar() {
   const [sessions, setSessions] = React.useState([
-    "Vicarious Trauma Assessment",
-    "Understanding Vicarious Trauma",
-    "Identifying Vicarious Trauma",
-    "Trauma Risk Check",
-    "Assessing Vicarious Stress",
-    "Vicarious Trauma Signs",
-    "Trauma Risk Factors",
-    "Detecting Vicarious Pain",
-    "Vicarious Impact",
-    "Trauma Evaluation",
-    "Spotting Vicarious Stress",
-    "Trauma Risk Quiz",
-    "Vicarious Trauma Test",
-    "Assessing Trauma Effects",
-    "Vicarious Trauma Check",
-    "Trauma Evaluation Talk",
-    "Detecting Vicarious Pain",
-    "Vicarious Impact Q&A",
-    "Trauma Risk Discussion",
-    "Vicarious Stress Probe",
+    {summary: "Vicarious Trauma Assessment", dateTime: "01/09/2023 12:00 PM"},
+    {summary: "Trauma Risk Check", dateTime: "01/09/2023 12:00 PM"},
+    {summary: "Detecting Vicarious Pain", dateTime: "01/09/2023 12:00 PM"},
+    {summary: "Vicarious Trauma Assessment", dateTime: "01/09/2023 12:00 PM"},
+    {summary: "Vicarious Stress Probe", dateTime: "01/09/2023 12:00 PM"},
   ]);
 
-  const pastChats = sessions.map((session, index) => {
+  const pastChats = sessions.map((_session, index) => {
     const maxMsgLen = 20;
+    const session = _session.summary;
+    const dateTime = _session.dateTime;
     return (
       <div key={index} className='session'>
         <div className='session-icon'><ChatBubbleIcon/></div>
-        <div className='session-name'>{session.substring(0,maxMsgLen) + (session.length > maxMsgLen ? "..." : "")}</div>
+        <div className='session-text-container'>
+          <div className='session-name'>{session.substring(0,maxMsgLen) + (session.length > maxMsgLen ? "..." : "")}</div>
+          <span className='session-metadata'>{dateTime}</span>
+        </div>
       </div>
     )
   });
@@ -109,7 +99,12 @@ function App() {
 
   return (
     <div className="App">
-      <div className="title">Lex</div>
+      <div className="title">
+        <span className='appDescription'> 
+          <span className='appName'>Lex •</span>
+          <i>&nbsp; Your legal compassion companion</i>
+        </span>
+      </div>
       <div className='mainContent'>
         <Sidebar/>
         <Main/>
