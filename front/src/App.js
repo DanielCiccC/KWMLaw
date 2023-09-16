@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 import '@radix-ui/themes/styles.css';
-import { Avatar } from '@radix-ui/themes';
-import { Theme } from '@radix-ui/themes';
-import { ChatBubbleIcon, DotsHorizontalIcon, FontSizeIcon, HamburgerMenuIcon, LightningBoltIcon, PaperPlaneIcon } from '@radix-ui/react-icons';
+import { Avatar, Card, Flex, Box, Text, Dialog,  Button} from '@radix-ui/themes';
+// import { Theme } from '@radix-ui/themes';
+import { ChatBubbleIcon, FontSizeIcon, HamburgerMenuIcon, LightningBoltIcon, PaperPlaneIcon } from '@radix-ui/react-icons';
 
 function Sidebar() {
   const [sessions, setSessions] = React.useState([
@@ -37,10 +37,56 @@ function Sidebar() {
         </div>
         <div className='prevMessages'>{pastChats}</div>
       </div>
-      <div className='userInfo'>
-        <div className='userIcon'>PD</div>
-        <div className='userName'>Patricia Daisy</div>
-        <DotsHorizontalIcon className='dotsIcon' />
+
+      <div className='bottom'>
+        <div classname='expedite'>
+          <Dialog.Root>
+            <Dialog.Trigger>
+              <Button color='green' size='3'>Expedite to counselling session</Button>
+            </Dialog.Trigger>
+
+            <Dialog.Content style={{ maxWidth: 450 }}>
+              <Dialog.Title>Expedite to counselling session</Dialog.Title>
+              <Dialog.Description size="2" mb="4">
+                Make changes to your profile.
+              </Dialog.Description>
+
+              <Flex direction="column" gap="3">
+              <Text as="div" size="2" mb="1" weight="bold">
+                    something
+                  </Text>
+              </Flex>
+
+              <Flex gap="3" mt="4" justify="end">
+                <Dialog.Close>
+                  <Button variant="soft" color="gray">
+                    Cancel
+                  </Button>
+                </Dialog.Close>
+                <Dialog.Close>
+                  <Button color='brown'>Accept</Button>
+                </Dialog.Close>
+              </Flex>
+            </Dialog.Content>
+          </Dialog.Root>
+        </div>
+        <div className='userInfo'>
+          {/* <div className='userIcon'>PD</div> */}
+          {/* <Avatar size="4" radius="full" fallback="PD" color='bronze' /> */}
+          <Card size='2' >
+            <Flex gap="3" align="center" >
+              <Avatar size="4" radius="full" fallback="PD" color='bronze' />
+              <Box>
+                <Text as="div" size="2" weight="bold">
+                  Patricia Daisy
+                </Text>
+                <Text as="div" size="2" color="gray">
+                  ImportantLawyer@outlook.com
+                </Text>
+              </Box>
+            </Flex>
+          </Card>
+        </div>
       </div>
     </div>
   )
@@ -50,15 +96,9 @@ function Message({ message, isSender }) {
   return (
     <div className={`message-container ${isSender ? "sender" : "recipient"}`}>
       <div className='message-icon-container'>
-        {isSender ? <span className='message-icon'>PD</span> : <LightningBoltIcon className='message-icon' />}
+        {isSender ? <Avatar size="4" radius="full" fallback="PD" color='bronze' /> : <Avatar size="4" radius="full" fallback={<LightningBoltIcon className='message-icon' />} color='brown' /> }
       </div>
-      <Theme>
-        {/* <Avatar
-          size="7"
-          src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?&w=64&h=64&dpr=2&q=70&crop=focalpoint&fp-x=0.5&fp-y=0.3&fp-z=1&fit=crop"
-          fallback="S"
-        /> */}
-      </Theme>
+      
       <div className='message-body'>
         <p>{message}</p>
       </div>
@@ -94,14 +134,22 @@ function Main() {
   }
 
   return (
-    <div className='main'>
-      <div className='chatMessages'>
-        {messageElements}
+    <div>
+      <div className="title">
+        <span className='appDescription'>
+          <span className='appName'>Lex •</span>
+          <i>&nbsp; Your legal compassion companion</i>
+        </span>
       </div>
+      <div className='main'>
+        <div className='chatMessages'>
+          {messageElements}
+        </div>
 
-      <div className='chatInput'>
-        <input className='chatInputField' id='msg_input' type='text' placeholder='Type a message...' onKeyDown={handleKeyDown} />
-        <PaperPlaneIcon className="chatInputButton" onClick={handleInput} />
+        <div className='chatInput'>
+          <input className='chatInputField' id='msg_input' type='text' placeholder='Type a message...' onKeyDown={handleKeyDown} />
+          <PaperPlaneIcon className="chatInputButton" onClick={handleInput} />
+        </div>
       </div>
     </div>
   )
@@ -111,12 +159,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="title">
-        <span className='appDescription'>
-          <span className='appName'>Lex •</span>
-          <i>&nbsp; Your legal compassion companion</i>
-        </span>
-      </div>
+      
       <div className='mainContent'>
         <Sidebar />
         <Main />
