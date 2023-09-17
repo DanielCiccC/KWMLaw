@@ -134,7 +134,7 @@ function Main() {
   }
 
   return (
-    <div>
+    <div className='main'>
       <div className="title">
         <span className='appDescription'>
           <span className='appName'>Lex •</span>
@@ -159,7 +159,6 @@ function App() {
 
   return (
     <div className="App">
-      
       <div className='mainContent'>
         <Sidebar />
         <Main />
