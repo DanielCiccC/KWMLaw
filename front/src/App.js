@@ -206,16 +206,6 @@ function Main() {
             body: "Thhank you. Do you have trouble concentrating when working on this particular matter?",
             isSender: false
         },
-
-        {
-            body: "Doo you suffer from Ligma?",
-            isSender: false
-        },
-
-        {
-            body: "Liigma nuts lmao",
-            isSender: false
-        },
     ];
     const [messages, setMessages] = React.useState([messageList[0]]);
     const [messageIndex, setMessageIndex] = React.useState(1);
