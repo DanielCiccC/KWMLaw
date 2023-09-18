@@ -38,48 +38,49 @@ def extract_docx_text(docx_bytes):
     return text
 
 # Infinite loop to check for new emails
-while True:
-    # Search for all unseen emails
-    status, email_ids = mail.search(None, "UNSEEN")
+def email_parsing():
+    while True:
+        # Search for all unseen emails
+        status, email_ids = mail.search(None, "UNSEEN")
 
-    if status == "OK":
-        email_ids = email_ids[0].split()
-        
-        for email_id in email_ids:
-            status, msg_data = mail.fetch(email_id, "(RFC822)")
+        if status == "OK":
+            email_ids = email_ids[0].split()
             
-            if status == "OK":
-                raw_email = msg_data[0][1]
-                msg = email.message_from_bytes(raw_email)
+            for email_id in email_ids:
+                status, msg_data = mail.fetch(email_id, "(RFC822)")
                 
-                print("Subject:", decode_header(msg["Subject"])[0][0])
-                print("From:", decode_header(msg["From"])[0][0])
-                
-                if msg.is_multipart():
-                    for part in msg.walk():
-                        content_type = part.get_content_type()
-                        content_disposition = str(part.get("Content-Disposition"))
-                        
-                        if "attachment" in content_disposition:
-                            filename = part.get_filename()
-                            if filename:
-                                print("Attachment:", filename)
-                                
-                        if "attachment" in content_disposition:
-                            filename = part.get_filename()
-                            if filename:
-                                attachment = part.get_payload(decode=True)
-                                if content_type == "application/pdf":
-                                    text = extract_pdf_text(attachment)
-                                elif content_type == "application/msword" or "vnd.openxmlformats-officedocument.wordprocessingml.document" in content_type:
-                                    text = extract_docx_text(attachment)
-                                else:
-                                    text = "Unsupported attachment type"
-                                print("Attachment Text:", text)
-                                
-                else:
-                    text = msg.get_payload(decode=True).decode()                
-                print("\n" + "=" * 40 + "\n") 
-    time.sleep(1)
+                if status == "OK":
+                    raw_email = msg_data[0][1]
+                    msg = email.message_from_bytes(raw_email)
+                    
+                    print("Subject:", decode_header(msg["Subject"])[0][0])
+                    print("From:", decode_header(msg["From"])[0][0])
+                    
+                    if msg.is_multipart():
+                        for part in msg.walk():
+                            content_type = part.get_content_type()
+                            content_disposition = str(part.get("Content-Disposition"))
+                            
+                            if "attachment" in content_disposition:
+                                filename = part.get_filename()
+                                if filename:
+                                    print("Attachment:", filename)
+                                    
+                            if "attachment" in content_disposition:
+                                filename = part.get_filename()
+                                if filename:
+                                    attachment = part.get_payload(decode=True)
+                                    if content_type == "application/pdf":
+                                        text = extract_pdf_text(attachment)
+                                    elif content_type == "application/msword" or "vnd.openxmlformats-officedocument.wordprocessingml.document" in content_type:
+                                        text = extract_docx_text(attachment)
+                                    else:
+                                        text = "Unsupported attachment type"
+                                    print("Attachment Text:", text)
+                                    
+                    else:
+                        text = msg.get_payload(decode=True).decode()                
+                    print("\n" + "=" * 40 + "\n") 
+        time.sleep(1)
 
-# mail.logout()
+    # mail.logout()

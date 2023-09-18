@@ -3,6 +3,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 import pickle
 import injestion as inj
+import PyPDF2
 
 
 #function to create a audit of each email, with a score
@@ -71,5 +72,11 @@ def calculate_tfidf(input_text):
 
     return sorted(tfidf_dict)
 
+#read in the sensitive text from chat GPT word list
+def read_sensitive_text():
+    with open('in/sens_word_list.txt', 'r') as sensitive_word_list:
+        words = sensitive_word_list.read().split(',')
+    return words
 
-print(calculate_tfidf(main_corpus[0]))
+
+print(read_sensitive_text())

@@ -1,10 +1,11 @@
 :root {
-  --highlight-gold: #9b9b9b;
-  --accent-primary:  	HSLA(25, 30.0%, 39.0%);
+  --highlight-gold: #FFFF;
+  --accent-primary:  	HSL(12, 22.0%, 21.5%);
   --accent-secondary: #FFFFFF;
-  --accent-tertiary: #F4F1E8;
+  --accent-tertiary: #f4f1e8b9;
   --icon-colour: #F4F1E8;
   --background-color: #FFFFFF;
+  --grey-border: #d3d3d3;
 }
 
 .App {
@@ -20,7 +21,7 @@
 .title{
   background-color: var(--highlight-gold);
   padding: 6px 0px;
-  height: 4%
+  height: 6%
 }
 
 .appName {
@@ -29,6 +30,16 @@
   font-size: 1.5em;
   font-weight: bold;
   white-space: nowrap;
+  color: var(--accent-primary);
+}
+
+.appName2 {
+  height: 30px;
+  line-height: 30px;
+  font-size: 1.1em;
+  font-weight: bold;
+  white-space: nowrap;
+  color: var(--accent-primary);
 }
 
 .appDescription {
@@ -40,6 +51,7 @@
   flex-direction: row;
   white-space: nowrap;
   justify-content: center;
+  color: var(--accent-primary);
 }
 
 .mainContent {
@@ -69,17 +81,20 @@
 }
 
 .sender {
-  background-color: var(--accent-secondary);
+  background-color: var(--accent-tertiary); 
+  border-color: gray;
+  border: 2px;
 }
 
 .recipient {
-  background-color: var(--accent-tertiary);
+  background-color: var(--accent-secondary);
 }
 
 .message-container {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  border-bottom: 1px solid var(--grey-border);
   align-items: center;
   min-height: 100px;
   padding: 0px 10%;
@@ -207,7 +222,7 @@
   flex-direction: row;
   justify-content: space-around;
   padding-top: 30px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   /* border-top: 1px solid black; */
   color: var(--accent-primary);
   font-weight: bold;

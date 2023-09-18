@@ -2,7 +2,7 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import './App.css';
 import '@radix-ui/themes/styles.css';
-import {Avatar, Card, Flex, Box, Text, Dialog, Button} from '@radix-ui/themes';
+import {Avatar, Card, Flex, Box, Text, Dialog, Button, DropdownMenu, CaretDownIcon} from '@radix-ui/themes';
 // import { Theme } from '@radix-ui/themes';
 import {
     ChatBubbleIcon,
@@ -27,7 +27,7 @@ function Sidebar() {
         const dateTime = _session.dateTime;
         return (
             <div key={index} className='session'>
-                <div className='session-icon'><ChatBubbleIcon/></div>
+                {/* <div className='session-icon'><ChatBubbleIcon/></div> */}
                 <div className='session-text-container'>
                     <div
                         className='session-name'>{session.substring(0, maxMsgLen) + (session.length > maxMsgLen ? "..." : "")}</div>
@@ -41,15 +41,30 @@ function Sidebar() {
         <div className='sidebar'>
             <div className='top'>
                 <div className='sidebarTopTray'>
-                    <HamburgerMenuIcon className='hamburgerIcon'/>
+                    <DropdownMenu.Root>
+                    <DropdownMenu.Trigger>
+                        
+                        <HamburgerMenuIcon className='hamburgerIcon'/>
+                        
+                        
+                    </DropdownMenu.Trigger>
+                    <DropdownMenu.Content>
+                        {/* <DropdownMenu.Item>Our disclaimer</DropdownMenu.Item> */}
+                        <DropdownMenu.Item>Reach out</DropdownMenu.Item>
+                        <DropdownMenu.Separator />
+                        <DropdownMenu.Item shortcut="Alt + F4">About Lex™</DropdownMenu.Item>
+                        <DropdownMenu.Item>Our Team</DropdownMenu.Item>
+                    </DropdownMenu.Content>
+                    </DropdownMenu.Root>
+                    
                 </div>
-                <div className='prevMessages'>{pastChats}</div>
+                {/* <div className='prevMessages'>{pastChats}</div> */}
             </div>
 
             <div className='bottom'>
                 {/*<div classname='expedite'>*/}
-                <div>`
-                    <Dialog.Root>
+                <div>
+                    {/* <Dialog.Root>
                         <Dialog.Trigger>
                             <Button color='green' size='3'>Expedite to counselling session</Button>
                         </Dialog.Trigger>
@@ -77,7 +92,7 @@ function Sidebar() {
                                 </Dialog.Close>
                             </Flex>
                         </Dialog.Content>
-                    </Dialog.Root>
+                    </Dialog.Root> */}
                 </div>
                 <div className='userInfo'>
                     {/* <div className='userIcon'>PD</div> */}
@@ -138,7 +153,7 @@ function Message({ message, isSender }) {
                 } else {
                     clearInterval(typingTimer);
                 }
-            }, 10); // Adjust the interval for typing speed
+            }, 20); // Adjust the interval for typing speed
 
             return () => {
                 clearInterval(typingTimer);
@@ -174,19 +189,31 @@ function Main() {
     // message twice.
     const messageList = [
         {
-            body: "Hii Patricia, I'm here to help you with your concerns regarding Vicarious Trauma. Could you please \ " +
-                "answer the following questions for me to help you. Please read each statement and describe how you \ " +
-                "relate to those statements. There are no right or wrong answers. Do not spend too much time on any statement.",
+            body: "Heello Patricia, I'm Lex, your legal compassion companion. I'm here to help you better understand \ " +
+            "your mental health and wellbeing. Together, we'll explore a few statements. Take your time to read each \ " + 
+            "question carefully and respond as honestly as you can. There are no right or wrong answers, so simply share your thoughts. \ " +
+            " \n\n Are you ready to begin?",
             isSender: false
         },
 
         {
-            body: "Thhanks for that response. How does the statement 'I found it very hard to wind down' apply to you?",
+            body: "Thhanks for that response. First question - it is important to check in with your emotional state through the day and identify \ " +
+            "distressing feelings. When you become stressed, do you recognise what is causing you to have these feelings?",
             isSender: false
         },
 
         {
-            body: "I  appreciate your response. How does the statement 'I experienced difficulty breathing (e.g. excessively rapid breathing breathing, breathlessness in the absence of physical exertion' apply to you?",
+            body: "Thhank you. Do you have trouble concentrating when working on this particular matter?",
+            isSender: false
+        },
+
+        {
+            body: "Doo you suffer from Ligma?",
+            isSender: false
+        },
+
+        {
+            body: "Liigma nuts lmao",
             isSender: false
         },
     ];
@@ -229,8 +256,11 @@ function Main() {
         <div className='main'>
             <div className="title">
         <span className='appDescription'>
-          <span className='appName'>Lex •</span>
-          <i>&nbsp; Your legal compassion companion</i>
+          <Button variant='outline' color='gray' size='4'> 
+            <span className='appName'>Lex •</span>
+            <i className='appName2'>&nbsp; your legal compassion companion</i>
+          </Button>
+          
         </span>
             </div>
             <div className='main'>
