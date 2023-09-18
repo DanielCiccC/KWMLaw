@@ -101,6 +101,26 @@ function Sidebar() {
     )
 }
 
+function BusyTyping({ message, isSender }) {
+    // const path = require("path");
+    // console.log(path.resolve(__dirname));
+    return (
+        <div className={`message-container sender`}>
+            <div className='message-icon-container'>
+                    <Avatar
+                        size='4'
+                        radius='full'
+                        fallback={<LightningBoltIcon className='message-icon' />}
+                        color='brown'
+                    />
+            </div>
+            <div className='message-body'>
+                <img width="55px" height="55px" alt="loading" src="https://assets-v2.lottiefiles.com/a/90bdd36c-1152-11ee-bdb8-cb8fe6b15cf6/Y75Gbkbapu.gif"></img>
+            </div>
+        </div>
+    );
+}
+
 function Message({ message, isSender }) {
     const [typingEffect, setTypingEffect] = useState('');
 
@@ -173,12 +193,20 @@ function Main() {
     const [messages, setMessages] = React.useState([messageList[0]]);
     const [messageIndex, setMessageIndex] = React.useState(1);
 
-    const messageElements = messages.map((message, index) => {
+    ////////////////////////////////////////////////////////////////////////////
+    // TODO: Change this back to let
+    ////////////////////////////////////////////////////////////////////////////
+    let messageElements = messages.map((message, index) => {
         console.log(message.body);
         return (
             <Message key={index} message={message.body} isSender={message.isSender}/>
         )
     });
+
+    messageElements = [
+        (<BusyTyping></BusyTyping>),
+        ...messageElements
+    ];
 
     const handleInput = (e) => {
         console.log(e.target);
