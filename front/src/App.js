@@ -192,33 +192,31 @@ function Main() {
     ];
     const [messages, setMessages] = React.useState([messageList[0]]);
     const [messageIndex, setMessageIndex] = React.useState(1);
+    const [showBusy, setShowBusy] = React.useState(false);
 
-    ////////////////////////////////////////////////////////////////////////////
-    // TODO: Change this back to let
-    ////////////////////////////////////////////////////////////////////////////
-    let messageElements = messages.map((message, index) => {
-        console.log(message.body);
+    const messageElements = messages.map((message, index) => {
         return (
             <Message key={index} message={message.body} isSender={message.isSender}/>
         )
     });
 
-    messageElements = [
-        (<BusyTyping></BusyTyping>),
-        ...messageElements
-    ];
+    const handleInput = async (e) => {
+      console.log(e.target);
+      const newMessages = [
+        ...messages,
+        { body: document.getElementById("msg_input").value, isSender: true },
+      ];
+      setMessages(newMessages);
+      e.target.value = "";
 
-    const handleInput = (e) => {
-        console.log(e.target);
-        const newMessages = [...messages, {body: document.getElementById('msg_input').value, isSender: true}]
-        setMessages(newMessages);
-        e.target.value = '';
+      setShowBusy(true)
 
-        setTimeout(() => {
-            if (messageIndex >= messageList.length) return;
-            setMessages([...newMessages, messageList[messageIndex]]);
-            setMessageIndex(messageIndex + 1);
-        }, 1000);
+      setTimeout(() => {
+        if (messageIndex >= messageList.length) return;
+        setShowBusy(false)
+        setMessages([...newMessages, messageList[messageIndex]]);
+        setMessageIndex(messageIndex + 1);
+      }, 1000);
     }
 
     const handleKeyDown = (e) => {
@@ -238,6 +236,7 @@ function Main() {
             <div className='main'>
                 <div className='chatMessages'>
                     {messageElements}
+                    {showBusy && <BusyTyping/>}
                 </div>
 
                 <div className='chatInput'>
