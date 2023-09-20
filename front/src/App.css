@@ -80,6 +80,10 @@
   justify-content: space-between;
 }
 
+.busy-typing {
+  background-color: var(--accent-secondary);
+}
+
 .sender {
   background-color: var(--accent-tertiary); 
   border-color: gray;

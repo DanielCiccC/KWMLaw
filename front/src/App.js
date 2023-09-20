@@ -116,11 +116,9 @@ function Sidebar() {
     )
 }
 
-function BusyTyping({ message, isSender }) {
-    // const path = require("path");
-    // console.log(path.resolve(__dirname));
+function BusyTyping() {
     return (
-        <div className={`message-container sender`}>
+        <div className="message-container busy-typing">
             <div className='message-icon-container'>
                     <Avatar
                         size='4'
@@ -130,7 +128,7 @@ function BusyTyping({ message, isSender }) {
                     />
             </div>
             <div className='message-body'>
-                <img width="55px" height="55px" alt="loading" src="https://assets-v2.lottiefiles.com/a/90bdd36c-1152-11ee-bdb8-cb8fe6b15cf6/Y75Gbkbapu.gif"></img>
+                <img width="55px" height="55px" alt="loading..." src="https://assets-v2.lottiefiles.com/a/90bdd36c-1152-11ee-bdb8-cb8fe6b15cf6/Y75Gbkbapu.gif"></img>
             </div>
         </div>
     );
@@ -224,17 +222,18 @@ function Main() {
         { body: document.getElementById("msg_input").value, isSender: true },
       ];
       setMessages(newMessages);
+      setShowBusy(true)
       e.target.value = "";
 
-      setShowBusy(true)
 
       setTimeout(() => {
         if (messageIndex >= messageList.length) return;
-        setShowBusy(false)
         setMessages([...newMessages, messageList[messageIndex]]);
         setMessageIndex(messageIndex + 1);
-      }, 1000);
-    }
+    }, 1000);
+
+    setShowBusy(false)
+}
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
