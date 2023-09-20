@@ -222,17 +222,20 @@ function Main() {
         { body: document.getElementById("msg_input").value, isSender: true },
       ];
       setMessages(newMessages);
-      setShowBusy(true)
       e.target.value = "";
+
+      if (!(messageIndex >= messageList.length)) {
+          setShowBusy(true)
+      }
 
 
       setTimeout(() => {
         if (messageIndex >= messageList.length) return;
+        setShowBusy(false)
         setMessages([...newMessages, messageList[messageIndex]]);
         setMessageIndex(messageIndex + 1);
     }, 1000);
 
-    setShowBusy(false)
 }
 
     const handleKeyDown = (e) => {
